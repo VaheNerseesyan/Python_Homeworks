@@ -64,3 +64,4 @@ def is_prime(num):
 
 
 print(list(filter(is_prime, [0, 1, 2, 3, 4, 27, 11, 9, 19, 21])))
+print("Vahe")
