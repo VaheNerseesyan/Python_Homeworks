@@ -49,10 +49,8 @@ import math
 
 
 def is_prime(num):
-    if num % 2 == 0:
+    if num % 2 == 0 and num != 2:
         return False
-    if num == 3:
-        return True
     #             ⬇️  this must be grather than 1
     for i in range(2, num // 2):
         """              ^^^ How can here be the other way, (num // math.floor(num**(1/2))) , because the smallest num after 2, that
@@ -64,3 +62,4 @@ def is_prime(num):
 
 
 print(list(filter(is_prime, [0, 1, 2, 3, 4, 27, 11, 9, 19, 21])))
+print("Vahe")
