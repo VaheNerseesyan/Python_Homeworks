@@ -23,24 +23,8 @@ print(list(map(lambda x: x * 2, [1, 2, 3, 4, 5])))
 Using Filter: Given a list of numbers, use filter() to extract all the even
 numbers.
 """
-print(
-    list(
-        filter(
-            lambda x: x % 2 == 0,
-            [
-                1,
-                3,
-                55,
-                4,
-                2,
-                34,
-                5,
-                6,
-                7,
-            ],
-        )
-    )
-)
+nums = [3, 4, 2, 8, 6]
+print(list(filter(lambda x: x % 2 == 0, nums)))
 
 
 # Task 4
@@ -193,7 +177,6 @@ def age_checking(age1: int, age2: int, age3: int):
     . Getting ages it inserts them in a list
     . And then checking is there age less than 16 or not
     """
-    ages = [age1, age2, age3]
     for i in ages:
         if i < 16:
             print("Too young!!!")
@@ -203,7 +186,9 @@ def age_checking(age1: int, age2: int, age3: int):
             break
 
 
-age1 = int(input("Input the first age: "))
-age2 = int(input("Input the second age: "))
-age3 = int(input("Input the third age: "))
-age_checking(age1, age2, age3)
+ages = list()
+for i in range(3):
+    age = int(input("Input the ages: "))
+    ages.append(age)
+
+age_checking(ages[0], ages[1], ages[2])
