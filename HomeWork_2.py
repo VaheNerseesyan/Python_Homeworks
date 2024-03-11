@@ -355,7 +355,7 @@ Output: 13
 """
 def max_min_len(lst:list) -> int:
     """
-    buble sorting
+    Assume that the max is lst[0] and the min is lst[0] and then checking with for and if, that is there the biggest one or the smallest one
     """
     max1 = len(lst[0])
     min1 = len(lst[0])
