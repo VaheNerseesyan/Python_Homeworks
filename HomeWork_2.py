@@ -61,10 +61,14 @@ def common_member(list1:list, list2:list) -> bool:
     """
     Using set's & function we can know have they any common elem or not
     """
-    if list(set(list1) & set(list2)) != []:
-        return True
-    else:
-        return False
+    is_common = bool
+    for i in list1:
+        if i in list2:
+            is_common = True
+            break
+        else:
+            return is_common == False
+    return is_common
 print(common_member([1,2,3,4],[5,6,6,6,6,3]))
 
 #Task 5
