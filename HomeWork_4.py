@@ -34,8 +34,7 @@ def tennis_score(result_of_game: list) -> str:
     """
     My way of the tennis score is this, and for his gold scores counting subtlety
     I used this method, reducing the score when it is like a:5 b:5, and the win will be
-    for 7 scores, not for 6 scores, so this code is reducing both of scores by 1, and
-    in result we have the correct win score checker
+    for 7 scores, not for 6 scores, so this code is changing the gold win count with two for all examples
     """
     count_a = 0
     count_b = 0
@@ -47,16 +46,10 @@ def tennis_score(result_of_game: list) -> str:
             count_a += 1
         elif result_of_game[k] == "b":
             count_b += 1
-        if count_a == 5 and count_b == 5:
-            count_a = count_b = 4
-        if count_a == 6 and count_b < 6:
+        if (count_a > 5 or count_b > 5) and (abs(count_a - count_b) >= 2):
             count_a = 0
             count_b = 0
             w_a += 1
-        elif count_a < 6 and count_b == 6:
-            count_a = 0
-            count_b = 0
-            w_b += 1
         k += 1
     return f"score -> a:{w_a} b:{w_b}"
 
@@ -165,7 +158,6 @@ Binary search without recursion
 def binary_search(lst, search):
     stop = len(lst) - 1
     start = 0
-    mid = None
     while start <= stop:
         mid = (stop + start) // 2
         if lst[mid] > search:
@@ -178,7 +170,7 @@ def binary_search(lst, search):
 
 
 lst = [4, 5, 6, 9, 20, 43, 52, 55, 56, 66, 73]
-search = 55
+search = 5
 result = binary_search(lst, search)
 if result == False:
     print(f"There is not element like {search}")
