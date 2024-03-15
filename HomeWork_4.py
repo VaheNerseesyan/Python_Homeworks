@@ -186,16 +186,24 @@ dct = {"Vahe": 10, "Vahag": 10, "Narek": 8, "Armen": 2, "Lusine": 1, "Gagou": 5}
 
 
 def dict_sorting(dct: dict) -> dict:
-    sorted_dict = {}
-    for i in range(len(dct)):
-        """
-        min(iterable, *[, default=obj, key=func]) -> value max(arg1, arg2, *args, *[, key=func]) -> value
-        The min() function allows using a key function that helps customize the comparison process.
-        The key argument accepts a callable function like int(), len(), ord(), or even a custom user-defined function.
-        """
-        min_key = min(dct, key=dct.get)
-        sorted_dict[min_key] = dct.pop(min_key)
-    return sorted_dict
+    """
+    1 method without sort function
+    2 method with sorted function
+    """
+    """ 1 """
+    # sorted_dict = {}
+    # for i in range(len(dct)):
+    #     """
+    #     min(iterable, *[, default=obj, key=func]) -> value max(arg1, arg2, *args, *[, key=func]) -> value
+    #     The min() function allows using a key function that helps customize the comparison process.
+    #     The key argument accepts a callable function like int(), len(), ord(), or even a custom user-defined function.
+    #     """
+    #     min_key = min(dct, key=dct.get)
+    #     sorted_dict[min_key] = dct.pop(min_key)
+    # return sorted_dict
+    """ 2 """
+    """Using lambda x: x[1] we get the values of dict elements from dct.items() and sorting by them"""
+    return dict(sorted(dct.items(), key=lambda x: x[1]))
 
 
 print(dict_sorting(dct))
