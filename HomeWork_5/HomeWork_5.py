@@ -108,6 +108,9 @@ find_long_word("HomeWork_5\Words.txt")
 
 
 # Extra Task
+"""
+Counting words from text in file
+"""
 def lyrics(file_name):
     lyrics = dict()
     with open(file_name, "r") as wordf:
