@@ -1,44 +1,35 @@
 """
 Armenian phone number validation
 """
-def add_country_code(returner):
+def add_country_code(phone: str) -> str:
     def wrapper():
         """
         checking the start of input phone number, if it is starting with 0XX... we will change it +374XX...
         """
-        phone_number = input("Input your phone number: ")
-        check = phone_number.strip()
+        check = phone.strip()
         """
         .startswith() function description
         string.startswith(value, start, end)
         """
         if check.startswith("+374"):
-            return returner(check)
+            pass
         if check.startswith("0"):
-            checker = "+374" + check[1:]
-            return returner(checker)
+            check = "+374" + check[1:]
+        """
+        checking the length of phone number and the codes from our armenian codes
+        """
+        phone_codes = ["33", "55", "93", "77", "94", "95", "98", "44", "41"]
+        if len(check) != 12:
+            return "Invalid Phone number !!!\nThe length of phone number is incorrect !!!"
+        if check[5:7] not in phone_codes:
+            return "Invalid Phone number !!!\nThe code of phone number does not exist !!!"
+        return "Valid Number"
     return wrapper
 
 
-def phone_number_validation(checked) -> str:
-    """
-    checking the length of phone number and the codes from our armenian codes
-    """
-    checker = checked
-    phone_codes = ["33", "55", "93", "77", "94", "95", "98", "44", "41"]
-    if len(checker) != 12:
-        return "Invalid Phone number !!!\nThe length of phone number is incorrect !!!"
-    if checker[5:7] not in phone_codes:
-        return "Invalid Phone number !!!\nThe code of phone number does not exist !!!"
-    return "Valid Number"
-
-
-@add_country_code
-def run(validated):
-    return phone_number_validation(validated)
-
-
-# print(run())
+# phone_number = input("Input your phone number: ")
+# country_code = add_country_code(phone_number)
+# print(country_code())
 
 
 # Extra Homework
@@ -77,13 +68,34 @@ The tests are designed such that there is exactly one solution.
 
 
 def pair_sum(numbers, target):
-    for i in range(len(numbers)):
-        for j in range(len(numbers) - i):
-            if numbers[i] + numbers[j] == target:
-                return [i+1, j+1]
+    """
+    Here is solution with two fores !
+    """
+    # for i in range(len(numbers)):
+    #     for j in range(len(numbers) - i):
+    #         if numbers[i] + numbers[j] == target:
+    #             return [i+1, j+1]
+    """
+    And here is solution with two whiles !
+    """
+    done = None
+    k = 0
+    n = 0
+    while n != len(numbers):
+        while k != len(numbers):
+            if numbers[n] + numbers[len(numbers) - k - 1] < target:
+                break
+            if numbers[n] + numbers[len(numbers) - k - 1] != target:
+                k += 1
+            else:
+                done = [n + 1, len(numbers) - k]
+                break
+        if done != None:
+            return done
+        n += 1
 
 
-run1 = pair_sum([2, 7, 11, 15], 9)
-run2 = pair_sum([2, 3, 4], 6)
-run3 = pair_sum([-1, 0], -1)
-print(run2)
+run1 = pair_sum([2, 7, 11, 15], 18) # -> [2, 3]
+# run2 = pair_sum([2, 3, 4], 6) # -> [1, 3]
+# run3 = pair_sum([-1, 0], -1) # -> [1, 2]
+print(run1)
