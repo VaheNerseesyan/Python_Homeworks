@@ -214,19 +214,25 @@ import random
 class Queastion_Game:
     def __init__(self, questions: dict):
         self.questions = questions
+        self.incorrect_counter = 0
 
-    def question_choose(self, incorrect_questions):
-        questions = random.choices(list(math_questions.items()), k=5 - len(incorrect_questions))
+    def question_choose(self, incorrect_questions, n=5):
+        questions = random.choices(list(math_questions.items()), k=n)
         questions.extend(incorrect_questions)
+        random.shuffle(questions)
+        return questions
+
+    def incorrect_question_choose(self, incorrect_questions, n=3):
+        questions = random.choices(incorrect_questions, k=n)
         random.shuffle(questions)
         return questions
 
     def game_brain(self, questions):
         incorrect = []
+        self.incorrect_counter = 0
         for question, answer in questions:
             print(f"Question: {question}")
             print("Answers: ")
-            # answers = random.shuffle((random.sample(list(self.questions.values()).remove(answer), 3)).append(answer))
             answers = list(math_questions.values())
             answers.remove(answer)
             answers = random.choices(answers, k=3)
@@ -237,26 +243,35 @@ class Queastion_Game:
             user_answer = input("Your choice is: ")
             if user_answer == answer:
                 print("Correct !")
+                # self.correct_counter += 1
+                try:
+                    incorrect.remove((question, answer))
+                except ValueError:
+                    pass
             else:
                 print("Incorrect !!!")
-                incorrect.append((question, answer))
+                self.incorrect_counter += 1
+                if (question, answer) not in incorrect:
+                    incorrect.append((question, answer))
         return incorrect
 
     def printer(self):
-        return "Brain Game!\nLet's Start !"
+        return "\nBrain Game!\n"
 
-    def main(self, incorrect_questions):
+    def main(self, incorrect_questions, n=5):
         print(self.printer())
-        # incorrect_questions = []
-        questions = self.question_choose(incorrect_questions)
+        questions = self.question_choose(incorrect_questions, n)
         incorrect_questions = self.game_brain(questions)
-        if not incorrect_questions:
-            return "Congratulations! You answered all questions correctly."
-        choice = input("Do you want to play again? (y/n) ")
-        if choice == "y":
-            return self.main(incorrect_questions)
-        print("Bye")
-
+        # while True:
+        #     if self.incorrect_counter > 2.5 or self.incorrect_counter == 1:
+        #         return self.main(incorrect_questions, 3)
+        #     if not incorrect_questions:
+        #         return "Congratulations! You answered all questions correctly."
+        if self.incorrect_counter == 3:
+            questions = self.incorrect_question_choose(incorrect_questions, 3)
+            incorrect_questions = self.game_brain(questions)
+        if self.incorrect_counter == 4:
+            questions = self.incorrect_question_choose(incorrect_questions, 3)
 
 math_questions = {
     "What is 2 + 2?": "4",
