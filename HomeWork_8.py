@@ -67,7 +67,7 @@ The tests are designed such that there is exactly one solution.
 """
 
 
-def pair_sum(numbers, target):
+def pair_sum(numbers: list, target: int) -> list:
     """
     Here is solution with two fores !
     """
