@@ -153,6 +153,7 @@ def tic_tac_toe():
                         f"Well, First Player you are {first_player}, and the Second Player is {second_player} !"
                     )
                     print()
+                    break
                 elif first_player == "o" or first_player == "O":
                     second_player = "X"
                     first_player = "O"
@@ -161,6 +162,7 @@ def tic_tac_toe():
                         f"Well, First Player you are {first_player}, and the Second Player is {second_player} !"
                     )
                     print()
+                    break
                 else:
                     print("Invalid player option !")
                     print()
